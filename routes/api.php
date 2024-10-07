@@ -5,16 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/tokens/create', function () {
-    $user = User::query()->create([
-        'name' => 'Creator',
-        'email' => 'creator@gmail.com',
-        'password' => Hash::make('creator')
-    ]);
-
-    $token = $user->createToken('creator')->plainTextToken;
-
-    return response()->json(['token' => $token]);
+Route::get('/users', function () {
+    $users = User::all();
+    return response()->json($users);
 });
 
 Route::get('/user', function (Request $request) {
