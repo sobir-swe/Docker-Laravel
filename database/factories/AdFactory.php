@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Branch;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,8 +20,15 @@ class AdFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'user_id' => User::factory(),
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->paragraph(),
+            'price' => $this->faker->randomFloat(2, 400, 1000),
+            'rooms' => $this->faker->numberBetween(1, 10),
+            'gender' => $this->faker->randomElement(['male', 'female']),
+            'address' => $this->faker->address(),
+            'user_id' => User::all()->random()->id,
+            'branch_id' => Branch::all()->random()->id,
+            'status_id' => Status::all()->random()->id,
         ];
     }
 }
